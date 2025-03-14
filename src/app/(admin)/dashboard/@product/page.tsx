@@ -7,7 +7,7 @@ export default function AdminProductPage() {
   const revalidate = async () => {
     console.log("teststs", process.env);
     const res = await fetch(
-      `http://localhost:3000/api/revalidate?tag=products&secret=${process.env.REVALIDATE_TOKEN}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/revalidate?tag=products&secret=${process.env.REVALIDATE_TOKEN}`,
       {
         method: "POST",
       }

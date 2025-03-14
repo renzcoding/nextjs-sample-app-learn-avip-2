@@ -1,21 +1,36 @@
-import { getData } from "@/app/services/products";
+"use client";
+
+// import { getData } from "@/app/services/products";
 import Image from "next/image";
 import Link from "next/link";
+import useSwr from "swr";
 
-type ProductPageProps = { params: { slug: string[] } };
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default async function ProductPage(props: ProductPageProps) {
+type PageProps = { params: { slug: string[] } };
+
+export default function ProductPage(props: PageProps | any) {
   const { params } = props;
-  const products = await getData(`http://localhost:3000/api/product`);
-  console.log(products);
+  /* const products = await getData(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product`
+  ); */
+  // console.log(products);
+
+  const { data, isLoading } = useSwr(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product`,
+    fetcher
+  );
+
+  console.log("this is data ", data);
+  const products = { data: isLoading ? [] : data.data };
+  console.log("this is data ", products);
 
   return (
     <div className="grid grid-cols-4 mt-5 place-items-center">
       {/* <h1>{params.slug ? "Detail Product Page" : "Product Page"}</h1> */}
 
-      {products.data.length > 0 &&
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        products.data.map((product: any) => (
+      {products.data?.length > 0 &&
+        products.data?.map((product: any) => (
           <Link
             href={`/product/detail/${product.id}`}
             key={product.id}

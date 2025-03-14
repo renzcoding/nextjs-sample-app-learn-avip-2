@@ -1,14 +1,12 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function LoginPage() {
+function LoginComponent() {
   const searchParams = useSearchParams();
 
   const callbackUrl = searchParams.get("callbackUrl") || "/";
@@ -18,7 +16,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setError("");
@@ -65,7 +62,9 @@ export default function LoginPage() {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img
+          <Image
+            width={100}
+            height={100}
             className="w-8 h-8 mr-2"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
@@ -176,5 +175,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginComponent />
+    </Suspense>
   );
 }

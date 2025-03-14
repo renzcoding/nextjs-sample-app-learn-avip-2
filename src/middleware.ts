@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import withAuth from "./app/middlewares/withAuth";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function mainMiddleware(request: NextRequest) {
   /* return NextResponse.redirect(new URL("/", request.url));
   const isLogin = true;

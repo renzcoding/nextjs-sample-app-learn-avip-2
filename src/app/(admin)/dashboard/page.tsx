@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react"; */
 
 export default function DashboardPage() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   /* const { data: session, status }: { data: any; status: string } = useSession();
   const router = useRouter();
 

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Home",
   description: "this is home page",
-  authors: [{ name: "Budi", url: "http://localhost:3000" }],
+  authors: [{ name: "Budi", url: `${process.env.NEXT_PUBLIC_API_URL}` }],
   icons: "/icon.jpg",
   openGraph: {
     title: "Home",

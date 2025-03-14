@@ -1,11 +1,14 @@
 import { getData } from "@/app/services/products";
+import Image from "next/image";
 import Link from "next/link";
 
 type ProductPageProps = { params: { slug: string[] } };
 
 export default async function ProductPage(props: ProductPageProps) {
   const { params } = props;
-  const products = await getData(`http://localhost:3000/api/product`);
+  const products = await getData(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/product`
+  );
   console.log(products);
 
   return (
@@ -13,14 +16,15 @@ export default async function ProductPage(props: ProductPageProps) {
       {/* <h1>{params.slug ? "Detail Product Page" : "Product Page"}</h1> */}
 
       {products.data.length > 0 &&
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         products.data.map((product: any) => (
           <div
             key={product.id}
             className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 my-5 gap-3"
           >
             <Link href="#">
-              <img
+              <Image
+                width={500}
+                height={500}
                 className="p-8 rounded-t-lg object-cover h-100 w-full"
                 src={product.image}
                 alt={product.image}

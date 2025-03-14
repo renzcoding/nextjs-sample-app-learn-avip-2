@@ -5,7 +5,6 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -27,7 +26,6 @@ const authOptions: NextAuthOptions = {
           // fullname: string;
         };
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         /* const user: any = {
           id: 1,
           name: "Renz",
@@ -40,7 +38,6 @@ const authOptions: NextAuthOptions = {
           return null;
         } */
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const user: any = await login({ email, password });
         console.log(user);
         if (user) {
@@ -60,7 +57,6 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, account, user }: any) {
       if (account?.provider === "credentials") {
         token.email = user?.email;
@@ -79,7 +75,6 @@ const authOptions: NextAuthOptions = {
         };
         await loginWithGoogle(
           data,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (result: { status: boolean; message: string; data: any }) => {
             if (result.status) {
               token.email = result.data.email;
@@ -92,7 +87,6 @@ const authOptions: NextAuthOptions = {
       return token;
     },
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async session({ session, token }: any) {
       if ("email" in token) {
         session.user.email = token.email;

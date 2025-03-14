@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,7 +9,6 @@ export default function RegisterPage() {
   const { push } = useRouter();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError("");
@@ -39,7 +39,9 @@ export default function RegisterPage() {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
-          <img
+          <Image
+            width={50}
+            height={50}
             className="w-8 h-8 mr-2"
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"

@@ -37,7 +37,6 @@ export async function signUp(
     password: string;
     role?: string;
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   callback: Function
 ) {
   console.log("tests");
@@ -84,7 +83,6 @@ export async function signIn(userData: { email: string }) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function signInWithGoogle(userData: any, callback: any) {
   const q = query(
     collection(firestore, "users"),
@@ -92,7 +90,6 @@ export async function signInWithGoogle(userData: any, callback: any) {
   );
 
   const snapshot = await getDocs(q);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const data: any = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
@@ -157,7 +154,6 @@ export async function register(data: {
     try {
       await addDoc(collection(firestore, "users"), data);
       return { status: true, statusCode: 200, message: "Register success" };
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return { status: false, statusCode: 400, message: "Register failed" };
     }
@@ -188,14 +184,12 @@ export async function login(data: { email: string; password: string }) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function loginWithGoogle(data: any, callback: any) {
   const q = query(
     collection(firestore, "users"),
     where("email", "==", data.email)
   );
   const snapshot = await getDocs(q);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const users: any = snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),

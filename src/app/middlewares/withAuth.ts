@@ -13,7 +13,6 @@ export default function withAuth(
   middleware: NextMiddleware,
   requireAuth: string[] = []
 ) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return async (req: NextRequest, next: NextFetchEvent) => {
     const pathname = req.nextUrl.pathname;
 
@@ -30,15 +29,13 @@ export default function withAuth(
 
       if (token) {
         if (authPage.includes(pathname)) {
-          return NextResponse.redirect(new URL("/", req.url))
+          return NextResponse.redirect(new URL("/", req.url));
         }
-        
+
         if (token.role !== "admin" && onlyAdminPage.includes(pathname)) {
           return NextResponse.redirect(new URL("/", req.url));
         }
       }
-
-      
     }
     return middleware(req, next);
   };

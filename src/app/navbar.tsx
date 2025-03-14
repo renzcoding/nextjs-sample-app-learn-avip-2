@@ -5,12 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: session, status }: { data: any; status: string } = useSession();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const { status }: { status: string } = useSession();
 
   return (
